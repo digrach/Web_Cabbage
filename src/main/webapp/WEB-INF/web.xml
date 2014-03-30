@@ -1,0 +1,102 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+	<display-name>Play Cabbage</display-name>
+	<description>Eat your greens</description>
+
+	<servlet>
+		<servlet-name>jersey-serlvet</servlet-name>
+		<servlet-class>
+			com.sun.jersey.spi.container.servlet.ServletContainer
+		</servlet-class>
+		<init-param>
+			<param-name>com.sun.jersey.config.property.packages</param-name>
+			<param-value>net.playcabbage.rest</param-value>
+		</init-param>
+		<init-param>
+			<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<!-- <load-on-startup>1</load-on-startup> -->
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>jersey-serlvet</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>greenservlet</servlet-name>
+		<servlet-class>net.playcabbage.app.GreenServlet</servlet-class>
+		<load-on-startup>0</load-on-startup>
+
+		<init-param>
+			<description>Min X coordinate for the grid.</description>
+			<param-name>min_x</param-name>
+			<param-value>1</param-value>
+		</init-param>
+		<init-param>
+			<description>Max X coordinate for the grid.</description>
+			<param-name>max_x</param-name>
+			<param-value>153</param-value>
+		</init-param>
+
+		<init-param>
+			<description>Min Y coordinate for the grid.</description>
+			<param-name>min_y</param-name>
+			<param-value>1</param-value>
+		</init-param>
+		<init-param>
+			<description>Max y coordinate for the grid.</description>
+			<param-name>max_y</param-name>
+			<param-value>88</param-value>
+		</init-param>
+
+		<init-param>
+			<description>Min Z coordinate for the grid.</description>
+			<param-name>min_z</param-name>
+			<param-value>-4</param-value>
+		</init-param>
+		<init-param>
+			<description>Max Z coordinate for the grid.</description>
+			<param-name>max_z</param-name>
+			<param-value>4</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet>
+		<servlet-name>aboutservlet</servlet-name>
+		<servlet-class>net.playcabbage.app.AboutServlet</servlet-class>
+	</servlet>
+
+
+
+	<servlet-mapping>
+		<servlet-name>greenservlet</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>greenservlet</servlet-name>
+		<url-pattern>/checkin</url-pattern>
+
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>aboutservlet</servlet-name>
+		<url-pattern>/about</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>mastergridservlet</servlet-name>
+		<servlet-class>net.playcabbage.app.MasterGridServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>mastergridservlet</servlet-name>
+		<url-pattern>/master</url-pattern>
+	</servlet-mapping>
+
+</web-app>
